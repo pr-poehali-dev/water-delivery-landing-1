@@ -5,10 +5,10 @@ const MOUNTAIN_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0
 const BOTTLES_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/31a42452-5fc7-4fb8-b652-038f291da871.jpg";
 
 const products = [
-  { volume: "20 л", label: "Питьевая 20л", price: "389", tag: "Популярное" },
-  { volume: "10 л", label: "Питьевая 10л", price: "199", tag: "" },
-  { volume: "5 л",  label: "Питьевая 5л",  price: "95",  tag: "" },
-  { volume: "0,5 л",label: "Питьевая 0,5л",price: "55",  tag: "" },
+  { volume: "20 л", label: "Питьевая", price: "389", tag: "Хит продаж", color: "from-[#e8f5ee] to-[#c8e6d4]", accent: "#2d7a4f", emoji: "🫧" },
+  { volume: "10 л", label: "Питьевая", price: "199", tag: "",             color: "from-[#e3f0fb] to-[#bbd8f5]", accent: "#2667a8", emoji: "💧" },
+  { volume: "5 л",  label: "Питьевая", price: "95",  tag: "",             color: "from-[#eef7ed] to-[#cde9c8]", accent: "#3a8c42", emoji: "🌿" },
+  { volume: "0,5 л",label: "Питьевая", price: "55",  tag: "",             color: "from-[#fef9ec] to-[#fde9b3]", accent: "#b07d10", emoji: "✨" },
 ];
 
 export default function Index() {
@@ -124,22 +124,34 @@ export default function Index() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {products.map((p) => (
-              <div key={p.label} className="relative bg-white rounded-3xl p-6 flex flex-col items-center text-center border-2 border-transparent hover:border-[hsl(var(--forest))] hover:shadow-xl transition-all duration-300 group">
-                {p.tag && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[hsl(var(--forest))] text-white text-[10px] font-body font-semibold px-3 py-0.5 rounded-full whitespace-nowrap">
-                    {p.tag}
-                  </span>
-                )}
-                {/* Bottle illustration */}
-                <div className="w-20 h-28 mb-4 relative">
-                  <img src={BOTTLES_IMG} alt={p.label} className="w-full h-full object-contain" />
+              <div key={p.volume} className="relative group flex flex-col rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 bg-white border border-white">
+                {/* Gradient top area */}
+                <div className={`relative bg-gradient-to-b ${p.color} pt-8 pb-4 px-4 flex flex-col items-center`}>
+                  {p.tag && (
+                    <span className="absolute top-3 left-3 text-white text-[10px] font-body font-semibold px-2.5 py-0.5 rounded-full whitespace-nowrap" style={{ backgroundColor: p.accent }}>
+                      {p.tag}
+                    </span>
+                  )}
+                  {/* Big volume badge */}
+                  <div className="w-20 h-20 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center mb-3 shadow-inner ring-2 ring-white/80">
+                    <span className="text-3xl">{p.emoji}</span>
+                  </div>
+                  <div className="font-display text-4xl font-bold leading-none" style={{ color: p.accent }}>{p.volume}</div>
+                  <div className="font-body text-xs mt-0.5 font-medium" style={{ color: p.accent + "aa" }}>{p.label}</div>
                 </div>
-                <div className="font-body text-xs text-[hsl(var(--muted-foreground))] mb-1">{p.label}</div>
-                <div className="font-display text-4xl text-[hsl(var(--moss))] font-bold leading-none">{p.price}</div>
-                <div className="font-body text-sm text-[hsl(var(--muted-foreground))] mb-5">₽</div>
-                <button className="w-full bg-[hsl(var(--forest))] text-white rounded-xl py-2.5 text-sm font-medium font-body hover:bg-[hsl(var(--moss))] transition-colors opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200">
-                  Заказать
-                </button>
+
+                {/* Bottom content */}
+                <div className="flex flex-col flex-1 p-5 items-center">
+                  <div className="flex items-end gap-1 mb-1">
+                    <span className="font-display text-4xl font-bold text-[hsl(var(--moss))] leading-none">{p.price}</span>
+                    <span className="font-body text-lg text-[hsl(var(--muted-foreground))] mb-0.5">₽</span>
+                  </div>
+                  <div className="text-[10px] text-[hsl(var(--muted-foreground))] font-body mb-4">за бутыль</div>
+
+                  <button className="w-full py-2.5 rounded-xl text-sm font-semibold font-body text-white transition-all duration-200 hover:opacity-90 hover:shadow-md active:scale-95" style={{ backgroundColor: p.accent }}>
+                    Заказать
+                  </button>
+                </div>
               </div>
             ))}
           </div>
