@@ -1,6 +1,6 @@
 import Icon from "@/components/ui/icon";
 
-const VAN_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/d50f17af-a32f-46ac-bebd-5ee157ff4bbc.jpg";
+const VAN_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/5ce6c045-14e5-41d4-850c-a78ecfc05521.jpg";
 const MOUNTAIN_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/9c94f8d7-fe81-48cd-85f1-e6b9fc178090.jpg";
 
 const products = [
@@ -62,7 +62,7 @@ export default function Index() {
       {/* ── HERO: "Куда попал" ── */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-6">
         <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-[hsl(var(--moss))] text-center mb-8 font-light">
-          Родниковая вода в <em className="italic font-semibold text-[hsl(var(--water))]">миллитонном</em> балансе
+          Родниковая вода в <em className="italic font-semibold text-[hsl(var(--water))]">Нижнем Тагиле</em>
         </h1>
 
         {/* Hero split image block — van + mountain */}
@@ -134,11 +134,11 @@ export default function Index() {
                         {p.tag}
                       </span>
                     )}
-                    {/* Bottle image — масштаб по объёму */}
+                    {/* Bottle image — масштаб по объёму, mix-blend убирает белый фон */}
                     <img
                       src={p.img}
                       alt={`${p.label} ${p.volume}`}
-                      className={`${imgHeights[i]} w-auto object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-105`}
+                      className={`${imgHeights[i]} w-auto object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-multiply`}
                     />
                   </div>
 
@@ -210,8 +210,8 @@ export default function Index() {
       <section id="contacts" className="bg-white py-16 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-[hsl(var(--forest)/0.08)] border border-[hsl(var(--forest)/0.2)] text-[hsl(var(--forest))] text-sm font-body font-semibold px-5 py-2 rounded-full mb-6">
-              <Icon name="Star" size={15} />
+            <div className="inline-flex items-center gap-3 bg-[hsl(var(--forest)/0.08)] border-2 border-[hsl(var(--forest)/0.25)] text-[hsl(var(--forest))] font-body font-bold px-7 py-3 rounded-full mb-6 text-xl sm:text-2xl">
+              <Icon name="Star" size={22} />
               Бесплатная доставка!
             </div>
             <h2 className="font-display text-4xl sm:text-5xl text-[hsl(var(--moss))] font-light mb-3">
