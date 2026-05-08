@@ -1,14 +1,13 @@
 import Icon from "@/components/ui/icon";
 
-const VAN_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/326a6b8e-09bc-4c02-aff9-f49e03faa8ae.jpg";
+const VAN_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/d50f17af-a32f-46ac-bebd-5ee157ff4bbc.jpg";
 const MOUNTAIN_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/9c94f8d7-fe81-48cd-85f1-e6b9fc178090.jpg";
-const BOTTLES_IMG = "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/31a42452-5fc7-4fb8-b652-038f291da871.jpg";
 
 const products = [
-  { volume: "20 л", label: "Питьевая", price: "389", tag: "Хит продаж", color: "from-[#e8f5ee] to-[#c8e6d4]", accent: "#2d7a4f", emoji: "🫧" },
-  { volume: "10 л", label: "Питьевая", price: "199", tag: "",             color: "from-[#e3f0fb] to-[#bbd8f5]", accent: "#2667a8", emoji: "💧" },
-  { volume: "5 л",  label: "Питьевая", price: "95",  tag: "",             color: "from-[#eef7ed] to-[#cde9c8]", accent: "#3a8c42", emoji: "🌿" },
-  { volume: "0,5 л",label: "Питьевая", price: "55",  tag: "",             color: "from-[#fef9ec] to-[#fde9b3]", accent: "#b07d10", emoji: "✨" },
+  { volume: "20 л", label: "Питьевая", price: "389", tag: "Хит продаж", color: "from-[#e8f5ee] to-[#c8e6d4]", accent: "#2d7a4f", img: "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/d544ceae-ef2d-4b41-8ddb-f8dce4ba438d.jpg" },
+  { volume: "10 л", label: "Питьевая", price: "199", tag: "",            color: "from-[#e3f0fb] to-[#bbd8f5]", accent: "#2667a8", img: "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/a29e2ce1-6b4e-4ae4-9497-49c265c1ecca.jpg" },
+  { volume: "5 л",  label: "Питьевая", price: "95",  tag: "",            color: "from-[#eef7ed] to-[#cde9c8]", accent: "#3a8c42", img: "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/5c3cbe93-e6b0-4603-8f92-9ae309dadae4.jpg" },
+  { volume: "0,5 л",label: "Питьевая", price: "55",  tag: "",            color: "from-[#fef9ec] to-[#fde9b3]", accent: "#b07d10", img: "https://cdn.poehali.dev/projects/8d5f49a0-3a30-46eb-afbd-0c64976b871b/files/feac483c-066c-428a-9366-0dba43da8ceb.jpg" },
 ];
 
 export default function Index() {
@@ -123,37 +122,43 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-            {products.map((p) => (
-              <div key={p.volume} className="relative group flex flex-col rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 bg-white border border-white">
-                {/* Gradient top area */}
-                <div className={`relative bg-gradient-to-b ${p.color} pt-8 pb-4 px-4 flex flex-col items-center`}>
-                  {p.tag && (
-                    <span className="absolute top-3 left-3 text-white text-[10px] font-body font-semibold px-2.5 py-0.5 rounded-full whitespace-nowrap" style={{ backgroundColor: p.accent }}>
-                      {p.tag}
-                    </span>
-                  )}
-                  {/* Big volume badge */}
-                  <div className="w-20 h-20 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center mb-3 shadow-inner ring-2 ring-white/80">
-                    <span className="text-3xl">{p.emoji}</span>
+            {products.map((p, i) => {
+              // Высота изображения пропорциональна объёму: 20л — высокая, 0.5л — маленькая
+              const imgHeights = ["h-44", "h-36", "h-28", "h-20"];
+              return (
+                <div key={p.volume} className="relative group flex flex-col rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 bg-white border border-white">
+                  {/* Gradient top area */}
+                  <div className={`relative bg-gradient-to-b ${p.color} pt-5 pb-3 px-4 flex flex-col items-center min-h-[180px] justify-end`}>
+                    {p.tag && (
+                      <span className="absolute top-3 left-3 text-white text-[10px] font-body font-semibold px-2.5 py-0.5 rounded-full whitespace-nowrap" style={{ backgroundColor: p.accent }}>
+                        {p.tag}
+                      </span>
+                    )}
+                    {/* Bottle image — масштаб по объёму */}
+                    <img
+                      src={p.img}
+                      alt={`${p.label} ${p.volume}`}
+                      className={`${imgHeights[i]} w-auto object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-105`}
+                    />
                   </div>
-                  <div className="font-display text-4xl font-bold leading-none" style={{ color: p.accent }}>{p.volume}</div>
-                  <div className="font-body text-xs mt-0.5 font-medium" style={{ color: p.accent + "aa" }}>{p.label}</div>
-                </div>
 
-                {/* Bottom content */}
-                <div className="flex flex-col flex-1 p-5 items-center">
-                  <div className="flex items-end gap-1 mb-1">
-                    <span className="font-display text-4xl font-bold text-[hsl(var(--moss))] leading-none">{p.price}</span>
-                    <span className="font-body text-lg text-[hsl(var(--muted-foreground))] mb-0.5">₽</span>
+                  {/* Bottom content */}
+                  <div className="flex flex-col flex-1 p-5 items-center">
+                    <div className="font-display text-3xl font-bold leading-none mb-0.5" style={{ color: p.accent }}>{p.volume}</div>
+                    <div className="font-body text-xs mb-3 font-medium" style={{ color: p.accent + "99" }}>{p.label}</div>
+                    <div className="flex items-end gap-1 mb-1">
+                      <span className="font-display text-4xl font-bold text-[hsl(var(--moss))] leading-none">{p.price}</span>
+                      <span className="font-body text-lg text-[hsl(var(--muted-foreground))] mb-0.5">₽</span>
+                    </div>
+                    <div className="text-[10px] text-[hsl(var(--muted-foreground))] font-body mb-4">за бутыль</div>
+
+                    <button className="w-full py-2.5 rounded-xl text-sm font-semibold font-body text-white transition-all duration-200 hover:opacity-90 hover:shadow-md active:scale-95" style={{ backgroundColor: p.accent }}>
+                      Заказать
+                    </button>
                   </div>
-                  <div className="text-[10px] text-[hsl(var(--muted-foreground))] font-body mb-4">за бутыль</div>
-
-                  <button className="w-full py-2.5 rounded-xl text-sm font-semibold font-body text-white transition-all duration-200 hover:opacity-90 hover:shadow-md active:scale-95" style={{ backgroundColor: p.accent }}>
-                    Заказать
-                  </button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -201,36 +206,41 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ── CTA: "Как стоять с вашим клиентом" — Быстрый заказ + Акции ── */}
+      {/* ── CTA ── */}
       <section id="contacts" className="bg-white py-16 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 text-sm font-body font-medium px-5 py-2 rounded-full mb-6">
-            <Icon name="Star" size={15} />
-            Бесплатная доставка!
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-[hsl(var(--forest)/0.08)] border border-[hsl(var(--forest)/0.2)] text-[hsl(var(--forest))] text-sm font-body font-semibold px-5 py-2 rounded-full mb-6">
+              <Icon name="Star" size={15} />
+              Бесплатная доставка!
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl text-[hsl(var(--moss))] font-light mb-3">
+              Закажите прямо сейчас
+            </h2>
+            <p className="font-body text-[hsl(var(--muted-foreground))] text-sm">
+              Первая доставка — бесплатно. Работаем ежедневно с 8:00 до 22:00.
+            </p>
           </div>
 
-          <h2 className="font-display text-4xl sm:text-5xl text-[hsl(var(--moss))] font-light mb-3">
-            Закажите прямо сейчас
-          </h2>
-          <p className="font-body text-[hsl(var(--muted-foreground))] mb-10 text-sm">
-            Первая доставка — бесплатно. Работаем ежедневно с 8:00 до 22:00.
-          </p>
-
-          {/* CTA Buttons — по эскизу: Быстрый заказ (большая), Акции (рядом), Связь с менеджером (под) */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
-            <button className="flex-1 sm:flex-none flex items-center justify-center gap-3 bg-[hsl(var(--forest))] text-white px-10 py-5 rounded-2xl font-semibold font-body text-lg hover:bg-[hsl(var(--moss))] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 transform">
-              <Icon name="Zap" size={20} />
-              Быстрый заказ
-            </button>
-            <button className="flex items-center justify-center gap-2 border-2 border-[hsl(var(--forest))] text-[hsl(var(--forest))] px-8 py-5 rounded-2xl font-semibold font-body text-base hover:bg-[hsl(var(--forest)/0.05)] transition-all">
-              <Icon name="Tag" size={18} />
-              Акции
+          {/* Кнопки: слева — Быстрый заказ + Связь с менеджером, справа — Акции */}
+          <div className="flex flex-col sm:flex-row gap-4 items-stretch">
+            {/* Левая колонка */}
+            <div className="flex flex-col gap-3 flex-1">
+              <button className="flex items-center justify-center gap-3 bg-[hsl(var(--forest))] text-white px-8 py-4 rounded-2xl font-semibold font-body text-base hover:bg-[hsl(var(--moss))] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 transform">
+                <Icon name="Zap" size={20} />
+                Быстрый заказ
+              </button>
+              <button className="flex items-center justify-center gap-3 border-2 border-[hsl(var(--border))] text-[hsl(var(--moss))] px-8 py-4 rounded-2xl font-medium font-body text-base hover:border-[hsl(var(--forest))] hover:text-[hsl(var(--forest))] transition-all">
+                <Icon name="MessageCircle" size={18} />
+                Связь с менеджером
+              </button>
+            </div>
+            {/* Правая колонка — Акции */}
+            <button className="flex flex-col items-center justify-center gap-2 border-2 border-[hsl(var(--forest))] text-[hsl(var(--forest))] px-10 py-4 rounded-2xl font-semibold font-body text-base hover:bg-[hsl(var(--forest)/0.05)] transition-all sm:w-48">
+              <Icon name="Tag" size={24} />
+              <span>Акции</span>
             </button>
           </div>
-          <button className="w-full sm:w-auto flex items-center justify-center gap-3 border-2 border-[hsl(var(--border))] text-[hsl(var(--moss))] px-10 py-4 rounded-2xl font-medium font-body text-base hover:border-[hsl(var(--forest))] hover:text-[hsl(var(--forest))] transition-all mx-auto">
-            <Icon name="MessageCircle" size={18} />
-            Связь с менеджером
-          </button>
         </div>
       </section>
 
